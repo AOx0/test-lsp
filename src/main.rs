@@ -11,6 +11,7 @@ use lsp_types::{
     TextDocumentItem, Url, VersionedTextDocumentIdentifier,
 };
 use lsp_types::{InitializeParams, ServerCapabilities};
+use pyo3::types::{IntoPyDict, PyAnyMethods};
 use std::collections::HashMap;
 use std::error::Error;
 
@@ -32,6 +33,28 @@ fn main() -> Result<(), Box<dyn Error + Sync + Send>> {
     };
 
     log::info!("starting generic LSP server");
+
+    //     pyo3::Python::with_gil(|py| -> pyo3::PyResult<()> {
+    //         let sys = py.import_bound("sys")?;
+    //         let version: String = sys.getattr("version")?.extract()?;
+
+    //         let locals = [
+    //             ("os", py.import_bound("os")?),
+    //             ("tensorflow", py.import_bound("tensorflow")?),
+    //             ("contractions", py.import_bound("contractions")?),
+    //         ]
+    //         .into_py_dict_bound(py);
+    //         let code = r###"
+    // a = 4
+    // ret = a + 4
+    // "###;
+    //         py.run_bound(code, None, Some(&locals))?;
+    //         let ret: usize = locals.get_item("ret")?.extract()?;
+
+    //         println!("Hello {}, I'm Python {}", ret, version);
+    //         Ok(())
+    //     })
+    //     .unwrap();
 
     // Create the transport. Includes the stdio (stdin and stdout) versions but this could
     // also be implemented to use sockets or HTTP.
